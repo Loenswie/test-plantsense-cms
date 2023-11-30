@@ -362,92 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiOwnerOwner extends Schema.CollectionType {
-  collectionName: 'owners';
-  info: {
-    singularName: 'owner';
-    pluralName: 'owners';
-    displayName: 'Owner';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    username: Attribute.String & Attribute.Required & Attribute.Unique;
-    email: Attribute.Email & Attribute.Required & Attribute.Private;
-    password: Attribute.Password &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.SetMinMaxLength<{
-        minLength: 5;
-      }>;
-    plants: Attribute.Relation<
-      'api::owner.owner',
-      'oneToMany',
-      'api::plant.plant'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::owner.owner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::owner.owner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPlantPlant extends Schema.CollectionType {
-  collectionName: 'plants';
-  info: {
-    singularName: 'plant';
-    pluralName: 'plants';
-    displayName: 'Plant';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    Type: Attribute.String & Attribute.Required;
-    owner: Attribute.Relation<
-      'api::plant.plant',
-      'oneToOne',
-      'api::owner.owner'
-    >;
-    Streak: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
-    Image: Attribute.Media & Attribute.Required;
-    Alive: Attribute.Boolean & Attribute.DefaultTo<true>;
-    Hydrated: Attribute.Boolean & Attribute.Required;
-    Temperature: Attribute.Decimal;
-    Light: Attribute.Decimal;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::plant.plant',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::plant.plant',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -763,6 +677,92 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiOwnerOwner extends Schema.CollectionType {
+  collectionName: 'owners';
+  info: {
+    singularName: 'owner';
+    pluralName: 'owners';
+    displayName: 'Owner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    username: Attribute.String & Attribute.Required & Attribute.Unique;
+    email: Attribute.Email & Attribute.Required & Attribute.Private;
+    password: Attribute.Password &
+      Attribute.Required &
+      Attribute.Private &
+      Attribute.SetMinMaxLength<{
+        minLength: 5;
+      }>;
+    plants: Attribute.Relation<
+      'api::owner.owner',
+      'oneToMany',
+      'api::plant.plant'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::owner.owner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPlantPlant extends Schema.CollectionType {
+  collectionName: 'plants';
+  info: {
+    singularName: 'plant';
+    pluralName: 'plants';
+    displayName: 'Plant';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Type: Attribute.String & Attribute.Required;
+    owner: Attribute.Relation<
+      'api::plant.plant',
+      'oneToOne',
+      'api::owner.owner'
+    >;
+    Streak: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
+    Image: Attribute.Media & Attribute.Required;
+    Alive: Attribute.Boolean & Attribute.DefaultTo<true>;
+    Hydrated: Attribute.Boolean & Attribute.Required;
+    Temperature: Attribute.Decimal;
+    Light: Attribute.Decimal;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::plant.plant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::plant.plant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -773,14 +773,14 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::owner.owner': ApiOwnerOwner;
-      'api::plant.plant': ApiPlantPlant;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::owner.owner': ApiOwnerOwner;
+      'api::plant.plant': ApiPlantPlant;
     }
   }
 }
