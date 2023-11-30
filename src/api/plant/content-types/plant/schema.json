@@ -24,18 +24,6 @@
       "relation": "oneToOne",
       "target": "api::owner.owner"
     },
-    "Moisture": {
-      "type": "string",
-      "required": true
-    },
-    "Light": {
-      "type": "string",
-      "required": true
-    },
-    "Temperature": {
-      "type": "string",
-      "required": true
-    },
     "Streak": {
       "type": "integer",
       "required": true,
@@ -55,6 +43,16 @@
     "Alive": {
       "type": "boolean",
       "default": true
+    },
+    "Hydrated": {
+      "type": "boolean",
+      "required": true
+    },
+    "Temperature": {
+      "type": "decimal"
+    },
+    "Light": {
+      "type": "decimal"
     }
   }
 }

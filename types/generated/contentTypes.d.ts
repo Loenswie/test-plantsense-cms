@@ -424,12 +424,12 @@ export interface ApiPlantPlant extends Schema.CollectionType {
       'oneToOne',
       'api::owner.owner'
     >;
-    Moisture: Attribute.String & Attribute.Required;
-    Light: Attribute.String & Attribute.Required;
-    Temperature: Attribute.String & Attribute.Required;
     Streak: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
     Image: Attribute.Media & Attribute.Required;
     Alive: Attribute.Boolean & Attribute.DefaultTo<true>;
+    Hydrated: Attribute.Boolean & Attribute.Required;
+    Temperature: Attribute.Decimal;
+    Light: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
