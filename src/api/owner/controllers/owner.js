@@ -12,10 +12,14 @@ module.exports = createCoreController('api::owner.owner', ({ strapi }) => ({
 
         const result = await super.findOne(ctx);
 
-        const plants = result.data.attributes.plants.data;
-        const details = ctx.query.details ? ctx.query.details.split(',') : [];
+        const plants = result.data.attributes.plants ? result.data.attributes.plants.data : [];
 
-        result.data.attributes.plants.data = strapi.services['api::plant.plant'].addDetailsToPlants(plants, details);
+        if (plants.length > 0) {
+            const details = ctx.query.details ? ctx.query.details.split(',') : [];
+
+            const plantsWithDetails = strapi.services['api::plant.plant'].addDetailsToPlants(plants, details);
+            result.data.attributes.plants.data = plantsWithDetails;
+        }
 
         return result;
     },
