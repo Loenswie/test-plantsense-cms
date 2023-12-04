@@ -31,6 +31,10 @@ function addDetailsToPlants(plants, details) {
                 const advice = getAdvice(Hydrated, Light, Temperature);
                 plant.attributes.Advice = advice;
             }
+            if (details.includes('thresholds')) {
+                const thresholds = getThresholds();
+                plant.attributes.thresholds = thresholds;
+            }
         });
     }
     return plants
@@ -63,6 +67,19 @@ function getAdvice(Hydrated, Light, Temperature) {
         advice.temperature = 'Your plant is too hot';
     }
     return advice
+}
+
+function getThresholds() {  // todo: this should be loaded from a database
+    return {
+        light: {
+            min: MIN_LIGHT_LEVEL,
+            max: MAX_LIGHT_LEVEL
+        },
+        temperature: {
+            min: MIN_TEMPERATURE,
+            max: MAX_TEMPERATURE
+        }
+    }
 }
 
 function hydrated(Hydrated) {
