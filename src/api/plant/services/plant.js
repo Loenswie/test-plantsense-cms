@@ -33,7 +33,7 @@ function addDetailsToPlants(plants, details) {
             }
             if (details.includes('thresholds')) {
                 const thresholds = getThresholds();
-                plant.attributes.thresholds = thresholds;
+                plant.attributes.Thresholds = thresholds;
             }
         });
     }
