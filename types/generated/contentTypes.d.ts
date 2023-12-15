@@ -689,14 +689,8 @@ export interface ApiOwnerOwner extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    username: Attribute.String & Attribute.Required & Attribute.Unique;
+    username: Attribute.String & Attribute.Required;
     email: Attribute.Email & Attribute.Required & Attribute.Unique;
-    password: Attribute.Password &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.SetMinMaxLength<{
-        minLength: 5;
-      }>;
     plants: Attribute.Relation<
       'api::owner.owner',
       'oneToMany',

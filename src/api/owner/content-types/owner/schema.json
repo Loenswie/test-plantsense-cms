@@ -15,18 +15,12 @@
     "username": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "email": {
       "type": "email",
       "required": true,
       "unique": true
-    },
-    "password": {
-      "type": "password",
-      "required": true,
-      "minLength": 5,
-      "private": true
     },
     "plants": {
       "type": "relation",
