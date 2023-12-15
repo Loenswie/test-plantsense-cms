@@ -690,7 +690,7 @@ export interface ApiOwnerOwner extends Schema.CollectionType {
   };
   attributes: {
     username: Attribute.String & Attribute.Required & Attribute.Unique;
-    email: Attribute.Email & Attribute.Required & Attribute.Private;
+    email: Attribute.Email & Attribute.Required & Attribute.Unique;
     password: Attribute.Password &
       Attribute.Required &
       Attribute.Private &

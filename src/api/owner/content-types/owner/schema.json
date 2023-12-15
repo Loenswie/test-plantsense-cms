@@ -20,7 +20,7 @@
     "email": {
       "type": "email",
       "required": true,
-      "private": true
+      "unique": true
     },
     "password": {
       "type": "password",

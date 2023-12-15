@@ -23,4 +23,20 @@ module.exports = createCoreController('api::owner.owner', ({ strapi }) => ({
 
         return result;
     },
+
+    async find(ctx) {
+
+        const result = await super.find(ctx);
+
+        const emailFilter = ctx.query.email ? ctx.query.email : null;
+
+        if (emailFilter) {
+            const filteredResult = result.data.filter(owner => owner.attributes.email === emailFilter);
+            result.data = filteredResult;
+        }
+        
+        return result;
+    },
+
+
 }));
