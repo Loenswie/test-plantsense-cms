@@ -25,7 +25,8 @@
     "plants": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::plant.plant"
+      "target": "api::plant.plant",
+      "mappedBy": "owner"
     }
   }
 }

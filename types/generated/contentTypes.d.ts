@@ -728,17 +728,21 @@ export interface ApiPlantPlant extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     Type: Attribute.String & Attribute.Required;
-    owner: Attribute.Relation<
-      'api::plant.plant',
-      'oneToOne',
-      'api::owner.owner'
-    >;
-    Streak: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
+    Streak: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<1>;
     Image: Attribute.Media & Attribute.Required;
     Alive: Attribute.Boolean & Attribute.DefaultTo<true>;
-    Hydrated: Attribute.Boolean & Attribute.Required;
-    Temperature: Attribute.Decimal;
-    Light: Attribute.Decimal;
+    Hydrated: Attribute.Boolean & Attribute.DefaultTo<true>;
+    Temperature: Attribute.Decimal & Attribute.DefaultTo<20>;
+    Light: Attribute.Decimal & Attribute.DefaultTo<0.5>;
+    owner: Attribute.Relation<
+      'api::plant.plant',
+      'manyToOne',
+      'api::owner.owner'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
