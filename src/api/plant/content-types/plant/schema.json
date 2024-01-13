@@ -56,6 +56,13 @@
       "relation": "manyToOne",
       "target": "api::owner.owner",
       "inversedBy": "plants"
+    },
+    "device_id": {
+      "type": "string",
+      "required": true,
+      "maxLength": 4,
+      "minLength": 4,
+      "unique": true
     }
   }
 }

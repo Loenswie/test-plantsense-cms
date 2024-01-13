@@ -743,6 +743,13 @@ export interface ApiPlantPlant extends Schema.CollectionType {
       'manyToOne',
       'api::owner.owner'
     >;
+    device_id: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+        maxLength: 4;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
