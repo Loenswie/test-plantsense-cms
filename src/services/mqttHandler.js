@@ -9,7 +9,8 @@ module.exports = {
             const deviceId = jsonData.device_id;
     
             // Query Strapi database to find the plant by device_id
-            const plant = await strapi.query('api::plant.plant').findOne({ device_id: deviceId });
+            const plant = await strapi.query('api::plant.plant').findOne({ where: { device_id: deviceId } });
+            console.log('Plant:', plant);
             if (plant.device_id != deviceId) {
                 console.log('Plant not found:', deviceId);
                 return;
