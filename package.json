@@ -16,6 +16,7 @@
     "@strapi/provider-upload-cloudinary": "^4.15.4",
     "@strapi/strapi": "4.15.4",
     "axios": "^1.6.2",
+    "mqtt": "^5.3.4",
     "pg": "8.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
