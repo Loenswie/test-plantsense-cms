@@ -18,4 +18,18 @@ module.exports = createCoreController('api::plant.plant', ({ strapi }) => ({
         return result;
     },
 
+    async find(ctx) {
+
+        const result = await super.find(ctx);
+
+        const deviceFilter = ctx.query.device_id ? ctx.query.device_id : null;
+
+        if (deviceFilter) {
+            const filteredResult = result.data.filter(plant => plant.attributes.device_id === deviceFilter);
+            result.data = filteredResult;
+        }
+        
+        return result;
+    },
+
 }));
