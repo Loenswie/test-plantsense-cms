@@ -7,7 +7,8 @@
 const { createCoreService } = require('@strapi/strapi').factories;
 
 module.exports = createCoreService('api::plant.plant', ({ strapi }) => ({
-    addDetailsToPlants
+    addDetailsToPlants,
+    addStreakToPlants
 }));
 
 // the following values should be loaded for each specific plant to fit their needs
@@ -94,4 +95,26 @@ function goodLightLevel(LightLevel) {
 
 function goodTemperature(Temperature) {
     return Temperature > MIN_TEMPERATURE && Temperature < MAX_TEMPERATURE;
+}
+
+function addStreakToPlants(plants) {
+    if (plants) {
+        plants.forEach(plant => {
+            // streak + 1
+            plant.attributes.Streak = 0;
+            const createdAt = new Date(plant.attributes.createdAt);
+            const today = new Date();
+            // @ts-ignore
+            const diffTime = Math.abs(today - createdAt);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            plant.attributes.Streak = diffDays - 1;
+
+            // Update the plant in the database
+            strapi.query('api::plant.plant').update({ where: {id: plant.id}, data: {
+                Streak: plant.attributes.Streak
+            }});
+            
+        });
+    }
+    return plants
 }

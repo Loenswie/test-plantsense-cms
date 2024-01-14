@@ -14,6 +14,7 @@ module.exports = createCoreController('api::plant.plant', ({ strapi }) => ({
         const details = ctx.query.details ? ctx.query.details.split(',') : [];
 
         result.data = strapi.services['api::plant.plant'].addDetailsToPlants([result.data], details);
+        result.data = strapi.services['api::plant.plant'].addStreakToPlants(result.data);
 
         return result;
     },
@@ -22,12 +23,16 @@ module.exports = createCoreController('api::plant.plant', ({ strapi }) => ({
 
         const result = await super.find(ctx);
 
+        
+
         const deviceFilter = ctx.query.device_id ? ctx.query.device_id : null;
 
         if (deviceFilter) {
             const filteredResult = result.data.filter(plant => plant.attributes.device_id === deviceFilter);
             result.data = filteredResult;
         }
+
+        result.data = strapi.services['api::plant.plant'].addStreakToPlants(result.data);
         
         return result;
     },
